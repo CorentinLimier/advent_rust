@@ -1,6 +1,6 @@
-use std::fs;
+// https://adventofcode.com/2022/day/1
 
-/* https://adventofcode.com/2022/day/1 */
+use std::fs;
 
 fn get_input(file_path: &str) -> String {
     let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
