@@ -22,13 +22,13 @@ pub fn main() {
     let input_content = get_input("input/01.txt");
     let elves = transform_input(input_content);
 
-    let mut calories_vector: Vec<i32> = elves.iter().map(|x| x.iter().sum()).collect();
+    let mut calories_by_elf: Vec<i32> = elves.iter().map(|x| x.iter().sum()).collect();
 
-    calories_vector.sort_by(|a, b| b.cmp(a));
+    calories_by_elf.sort_by(|a, b| b.cmp(a));
 
-    println!("Highest calories : {}", calories_vector[0]);
+    println!("Highest calories : {}", calories_by_elf[0]);
     println!(
         "Sum 3 highest calories : {}",
-        &calories_vector[0..3].iter().sum::<i32>()
+        &calories_by_elf[0..3].iter().sum::<i32>()
     );
 }
