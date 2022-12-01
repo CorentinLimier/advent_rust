@@ -1,6 +1,6 @@
 use std::env;
 
-mod day01;
+mod days;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -8,7 +8,7 @@ fn main() {
     let day = &args[1];
 
     if day == "01" {
-        day01::main();
+        days::day01::main();
     } else {
         println!("day not supported")
     }
