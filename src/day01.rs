@@ -7,30 +7,22 @@ fn get_input(file_path: &str) -> String {
     contents
 }
 
-fn split_blocs(input_content: String) -> Vec<String> {
-    let blocs = Vec::from_iter(input_content.split("\n\n").map(String::from));
-    blocs
-}
-
-fn sum_bloc(bloc: String) -> i32 {
-    let mut result = 0;
-    for line in bloc.lines() {
-        let number = line.parse::<i32>().unwrap();
-        result += number;
+fn transform_input(input_content: String) -> Vec<Vec<i32>> {
+    let mut elves = Vec::new();
+    let blocs = input_content.split("\n\n");
+    for bloc in blocs{
+        let elf_calories = bloc.lines().map(|x| x.parse::<i32>().unwrap()).collect();
+        elves.push(elf_calories)
     }
-    result
+
+    elves
 }
 
 pub fn main() {
     let input_content = get_input("input/01.txt");
-    let blocs = split_blocs(input_content);
+    let elves = transform_input(input_content);
 
-    let mut calories_vector = Vec::new();
-
-    for bloc in blocs {
-        let calories = sum_bloc(bloc);
-        calories_vector.push(calories)
-    }
+    let mut calories_vector: Vec<i32> = elves.iter().map(|x| x.iter().sum()).collect();
 
     calories_vector.sort_by(|a, b| b.cmp(a));
 
