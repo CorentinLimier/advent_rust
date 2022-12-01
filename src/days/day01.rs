@@ -2,17 +2,31 @@
 
 use std::fs;
 
+struct Elf{
+    calories: Vec<i32>,
+}
+
+impl Elf{
+    fn new(calories: Vec<i32>) -> Self{
+        Elf { calories: calories }
+    }
+
+    fn sum_calories(&self) -> i32{
+        self.calories.iter().sum()
+    }
+}
+
 fn get_input(file_path: &str) -> String {
     let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
     contents
 }
 
-fn transform_input(input_content: String) -> Vec<Vec<i32>> {
+fn transform_input(input_content: String) -> Vec<Elf> {
     let mut elves = Vec::new();
     let blocs = input_content.split("\n\n");
     for bloc in blocs{
-        let elf_calories = bloc.lines().map(|x| x.parse::<i32>().unwrap()).collect();
-        elves.push(elf_calories)
+        let elf = Elf::new(bloc.lines().map(|x| x.parse::<i32>().unwrap()).collect());
+        elves.push(elf)
     }
 
     elves
@@ -22,7 +36,7 @@ pub fn main() {
     let input_content = get_input("input/01.txt");
     let elves = transform_input(input_content);
 
-    let mut calories_by_elf: Vec<i32> = elves.iter().map(|x| x.iter().sum()).collect();
+    let mut calories_by_elf: Vec<i32> = elves.iter().map(|x| x.sum_calories()).collect();
 
     calories_by_elf.sort_by(|a, b| b.cmp(a));
 
