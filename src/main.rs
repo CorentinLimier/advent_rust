@@ -4,8 +4,8 @@ mod days;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    
-    if args.len() == 1{
+
+    if args.len() == 1 {
         panic!("argument day is required");
     }
 
@@ -13,6 +13,8 @@ fn main() {
 
     if day == "01" {
         days::day01::main();
+    } else if day == "02" {
+        days::day02::main();
     } else {
         panic!("day not supported");
     }
