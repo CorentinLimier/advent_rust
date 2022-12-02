@@ -2,16 +2,16 @@
 
 use std::fs;
 
-struct Elf{
+struct Elf {
     calories: Vec<i32>,
 }
 
-impl Elf{
-    fn new(calories: Vec<i32>) -> Self{
+impl Elf {
+    fn new(calories: Vec<i32>) -> Self {
         Elf { calories: calories }
     }
 
-    fn sum_calories(&self) -> i32{
+    fn sum_calories(&self) -> i32 {
         self.calories.iter().sum()
     }
 }
@@ -24,7 +24,7 @@ fn get_input(file_path: &str) -> String {
 fn transform_input(input_content: String) -> Vec<Elf> {
     let mut elves = Vec::new();
     let blocs = input_content.split("\n\n");
-    for bloc in blocs{
+    for bloc in blocs {
         let elf = Elf::new(bloc.lines().map(|x| x.parse::<i32>().unwrap()).collect());
         elves.push(elf)
     }
@@ -45,4 +45,16 @@ pub fn main() {
         "Sum 3 highest calories : {}",
         &calories_by_elf[0..3].iter().sum::<i32>()
     );
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_sum_calories() {
+        let calories = vec![1, 2, 3];
+        let elf: Elf = Elf::new(calories);
+        assert_eq!(elf.sum_calories(), 6)
+    }
 }

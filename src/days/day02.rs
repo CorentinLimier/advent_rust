@@ -74,3 +74,32 @@ pub fn main() {
         println!("Score tournament {score_tournament}")
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_compute_round_score_equality() {
+        let me = "X";
+        let opponent = "A";
+        let score = compute_round_score(opponent, me);
+        assert_eq!(score, 4)
+    }
+
+    #[test]
+    fn test_compute_round_score_win() {
+        let me = "Y";
+        let opponent = "A";
+        let score = compute_round_score(opponent, me);
+        assert_eq!(score, 8)
+    }
+
+    #[test]
+    fn test_compute_round_score_lost() {
+        let me = "Y";
+        let opponent = "C";
+        let score = compute_round_score(opponent, me);
+        assert_eq!(score, 2)
+    }
+}
